@@ -1,0 +1,13 @@
+{
+    "name": "tsubasarcs/laravel-recommendation",
+    "description": "cp member get member database package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "tsubasarcs",
+            "email": "tsubasarcs@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
