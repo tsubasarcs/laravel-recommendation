@@ -1,13 +1,18 @@
 {
     "name": "tsubasarcs/laravel-recommendation",
     "description": "cp member get member database package",
+    "keywords": ["laravel", "MGM"],
     "license": "MIT",
+    "homepage": "https://github.com/tsubasarcs/laravel-recommendation",
     "authors": [
         {
             "name": "tsubasarcs",
             "email": "tsubasarcs@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
-    "require": {}
+    "minimum-stability": "stable",
+    "require": {},
+    "require-dev": {
+        "orchestra/testbench": "^3.5"
+    }
 }
