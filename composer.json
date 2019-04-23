@@ -1,18 +1,39 @@
 {
-    "name": "tsubasarcs/laravel-recommendation",
-    "description": "cp member get member database package",
-    "keywords": ["laravel", "MGM"],
-    "license": "MIT",
-    "homepage": "https://github.com/tsubasarcs/laravel-recommendation",
-    "authors": [
-        {
-            "name": "tsubasarcs",
-            "email": "tsubasarcs@gmail.com"
-        }
-    ],
-    "minimum-stability": "stable",
-    "require": {},
-    "require-dev": {
-        "orchestra/testbench": "^3.5"
+  "name": "tsubasarcs/laravel-recommendation",
+  "description": "cp member get member database package",
+  "license": "MIT",
+  "homepage": "https://github.com/tsubasarcs/laravel-recommendation",
+  "authors": [
+    {
+      "name": "tsubasarcs",
+      "email": "tsubasarcs@gmail.com"
     }
+  ],
+  "require": {
+    "illuminate/support": "^5.8"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.5",
+    "mockery/mockery": "^1.2",
+    "orchestra/testbench": "^3.8"
+  },
+  "autoload": {
+    "psr-4": {
+      "Tsubasarcs\\Recommendations\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tsubasarcs\\Recommendations\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Tsubasarcs\\Recommendations\\RecommendationServiceProvider"
+      ]
+    }
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
 }
