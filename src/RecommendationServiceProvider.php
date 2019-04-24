@@ -13,7 +13,7 @@ class RecommendationServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->mergeConfigFrom(__DIR__ . '/../config/recommendation.php', 'recommendation');
     }
 
     /**
@@ -23,6 +23,14 @@ class RecommendationServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__ . '/../database/migrations/' => database_path('migrations'),
+            ], 'migrations');
+
+            $this->publishes([
+                __DIR__ . '/../config/recommendation.php' => config_path('recommendation.php'),
+            ], 'config');
+        }
     }
 }
