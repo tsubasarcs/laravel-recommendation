@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f0e5f4a11c92c14db036cba454a87a6a",
+    "content-hash": "1823d44bd5323acac96a7f0571d30a89",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -2455,6 +2455,60 @@
             "time": "2019-04-07T13:18:21+00:00"
         },
         {
+            "name": "orchestra/database",
+            "version": "v3.5.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/orchestral/database.git",
+                "reference": "abcfcd827c0b1196cd200315390720e52a4a2a7b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/orchestral/database/zipball/abcfcd827c0b1196cd200315390720e52a4a2a7b",
+                "reference": "abcfcd827c0b1196cd200315390720e52a4a2a7b",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "~5.5.0",
+                "illuminate/database": "~5.5.0",
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Orchestra\\Database\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mior Muhammad Zaki",
+                    "email": "crynobone@gmail.com",
+                    "homepage": "https://github.com/crynobone"
+                },
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylorotwell@gmail.com",
+                    "homepage": "https://github.com/taylorotwell"
+                }
+            ],
+            "description": "Database Component for Orchestra Platform",
+            "keywords": [
+                "database",
+                "orchestra-platform",
+                "orchestral"
+            ],
+            "time": "2017-11-03T02:33:29+00:00"
+        },
+        {
             "name": "orchestra/testbench",
             "version": "v3.5.5",
             "source": {
@@ -3942,6 +3996,8 @@
     "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": ">=7.1"
+    },
     "platform-dev": []
 }

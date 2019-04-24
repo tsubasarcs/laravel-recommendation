@@ -25,7 +25,7 @@ class RecommendationServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../database/migrations/' => database_path('migrations'),
+                __DIR__ . '/../database/migrations/2019_04_23_074703_create_recommendations_table.php' => database_path('migrations/2019_04_23_074703_create_recommendations_table.php'),
             ], 'migrations');
 
             $this->publishes([
