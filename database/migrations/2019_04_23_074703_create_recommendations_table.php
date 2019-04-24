@@ -15,6 +15,11 @@ class CreateRecommendationsTable extends Migration
     {
         Schema::create('recommendations', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedInteger('user_id')->index()->comment('Users id');
+            $table->smallInteger('type')->comment('Code type');
+            $table->string('code')->comment('Unique code');
+            $table->tinyInteger('status')->comment('Is effective');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
