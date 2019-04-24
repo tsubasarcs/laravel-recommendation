@@ -16,4 +16,9 @@ class Recommendation extends Model
         'code',
         'status',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(config('recommendation.relation_model'), 'user_id');
+    }
 }
