@@ -6,4 +6,8 @@ return [
         'type' => 1,
         'length' => 10,
     ],
+    'prevent_repeat' => [
+        'model' => \Tsubasarcs\Recommendations\Recommendation::class,
+        'column' => 'code',
+    ]
 ];
