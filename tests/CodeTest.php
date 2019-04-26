@@ -2,7 +2,7 @@
 
 namespace Tsubasarcs\Recommendations\Tests;
 
-use Tsubasarcs\Recommendations\Code;
+use Tsubasarcs\Recommendations\Facades\Code;
 
 class CodeTest extends TestCase
 {
