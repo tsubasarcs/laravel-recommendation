@@ -2,8 +2,6 @@
 
 namespace Tsubasarcs\Recommendations;
 
-use Illuminate\Support\Str;
-
 class CodeService
 {
     const DEFAULT = 1;
@@ -41,7 +39,7 @@ class CodeService
         for ($i = self::DEFAULT; $i <= $this->times; $i++) {
             array_push($this->result, [
                 'type' => $this->type,
-                'code' => Str::random($this->length),
+                'code' => str_random($this->length),
             ]);
         }
 
