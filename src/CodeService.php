@@ -22,7 +22,7 @@ class CodeService
      * @param int $times
      * @return array
      */
-    public function generate($times = 1): array
+    public function generate(Int $times = 1): array
     {
         if ($this->times !== config('recommendation.default.times')) {
             return $this->genCodes();
@@ -39,7 +39,7 @@ class CodeService
         for ($i = self::DEFAULT; $i <= $this->times; $i++) {
             array_push($this->result, [
                 'type' => $this->type,
-                'code' => str_random($this->length),
+                'code' => $this->genCode(),
             ]);
         }
 
@@ -47,10 +47,24 @@ class CodeService
     }
 
     /**
+     * @return string
+     */
+    protected function genCode(): string
+    {
+        $code = str_random($this->length);
+
+        if (Recommendation::where('code', $code)->exists()) {
+            return $this->genCode();
+        }
+
+        return $code;
+    }
+
+    /**
      * @param int $times
      * @return CodeService
      */
-    public function times($times = 1): CodeService
+    public function times(Int $times = 1): CodeService
     {
         $this->times = $times;
 
@@ -61,7 +75,7 @@ class CodeService
      * @param int $type
      * @return CodeService
      */
-    public function type($type = 1): CodeService
+    public function type(Int $type = 1): CodeService
     {
         $this->type = $type;
 
@@ -72,7 +86,7 @@ class CodeService
      * @param int $length
      * @return CodeService
      */
-    public function length($length = 10): CodeService
+    public function length(Int $length = 10): CodeService
     {
         $this->length = $length;
 
