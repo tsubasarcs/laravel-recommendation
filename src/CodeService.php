@@ -7,10 +7,18 @@ use Illuminate\Support\Str;
 class CodeService
 {
     const DEFAULT = 1;
-    protected $result = [];
-    protected $times = 1;
-    protected $type = 1;
-    protected $length = 10;
+    protected $result;
+    protected $times;
+    protected $type;
+    protected $length;
+
+    public function __construct()
+    {
+        $this->result = [];
+        $this->times = config('recommendation.default.times');
+        $this->type = config('recommendation.default.type');
+        $this->length = config('recommendation.default.length');
+    }
 
     /**
      * @param int $times
@@ -18,17 +26,17 @@ class CodeService
      */
     public function generate($times = 1): array
     {
-        if ($this->times !== 1) {
-            return $this->genCode();
+        if ($this->times !== config('recommendation.default.times')) {
+            return $this->genCodes();
         }
 
-        return $this->times($times)->genCode();
+        return $this->times($times)->genCodes();
     }
 
     /**
      * @return array
      */
-    protected function genCode(): array
+    protected function genCodes(): array
     {
         for ($i = self::DEFAULT; $i <= $this->times; $i++) {
             array_push($this->result, [
