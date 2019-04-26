@@ -4,7 +4,7 @@ namespace Tsubasarcs\Recommendations;
 
 class CodeService
 {
-    const DEFAULT = 1;
+    const DEFAULT_TIMES = 1;
     protected $result;
     protected $times;
     protected $type;
@@ -13,7 +13,7 @@ class CodeService
     public function __construct()
     {
         $this->result = [];
-        $this->times = config('recommendation.default.times');
+        $this->times = self::DEFAULT_TIMES;
         $this->type = config('recommendation.default.type');
         $this->length = config('recommendation.default.length');
     }
@@ -22,12 +22,8 @@ class CodeService
      * @param int $times
      * @return array
      */
-    public function generate(Int $times = 1): array
+    public function generate($times = 0): array
     {
-        if ($this->times !== config('recommendation.default.times')) {
-            return $this->genCodes();
-        }
-
         return $this->times($times)->genCodes();
     }
 
@@ -36,7 +32,7 @@ class CodeService
      */
     protected function genCodes(): array
     {
-        for ($i = self::DEFAULT; $i <= $this->times; $i++) {
+        for ($i = self::DEFAULT_TIMES; $i <= $this->times; $i++) {
             array_push($this->result, [
                 'type' => $this->type,
                 'code' => $this->genCode(),
@@ -66,9 +62,9 @@ class CodeService
      * @param int $times
      * @return CodeService
      */
-    public function times(Int $times = 1): CodeService
+    public function times($times = 0): CodeService
     {
-        $this->times = $times;
+        $this->setAttribute($times, 'times');
 
         return $this;
     }
@@ -77,9 +73,9 @@ class CodeService
      * @param int $type
      * @return CodeService
      */
-    public function type(Int $type = 1): CodeService
+    public function type($type = 0): CodeService
     {
-        $this->type = $type;
+        $this->setAttribute($type, 'type');
 
         return $this;
     }
@@ -88,10 +84,19 @@ class CodeService
      * @param int $length
      * @return CodeService
      */
-    public function length(Int $length = 10): CodeService
+    public function length($length = 0): CodeService
     {
-        $this->length = $length;
+        $this->setAttribute($length, 'length');
 
         return $this;
+    }
+
+    /**
+     * @param $variable
+     * @param $attribute
+     */
+    protected function setAttribute($variable, $attribute): void
+    {
+        $this->{$attribute} = (!$variable or empty($variable) or gettype($variable) !== 'integer') ? $this->{$attribute} : $variable;
     }
 }
