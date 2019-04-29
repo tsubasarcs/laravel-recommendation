@@ -4,7 +4,7 @@ namespace Tsubasarcs\Recommendations\Tests;
 
 use Tsubasarcs\Recommendations\Facades\Code;
 
-class CodeTest extends TestCase
+class CodeServiceTest extends TestCase
 {
     /**
      * @test
