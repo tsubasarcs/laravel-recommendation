@@ -8,7 +8,7 @@ class CodeServiceTest extends TestCase
 {
     /**
      * @test
-     * @group Code
+     * @group CodeService
      */
     public function it_should_generate_a_code()
     {
@@ -23,7 +23,7 @@ class CodeServiceTest extends TestCase
 
     /**
      * @test
-     * @group Code
+     * @group CodeService
      */
     public function it_should_generate_two_codes_by_times()
     {
@@ -40,7 +40,7 @@ class CodeServiceTest extends TestCase
 
     /**
      * @test
-     * @group Code
+     * @group CodeService
      */
     public function it_should_generate_a_code_with_specified_type()
     {
@@ -55,7 +55,7 @@ class CodeServiceTest extends TestCase
 
     /**
      * @test
-     * @group Code
+     * @group CodeService
      */
     public function it_should_generate_a_code_with_specified_length()
     {
@@ -87,7 +87,7 @@ class CodeServiceTest extends TestCase
 
     /**
      * @test
-     * @group Code
+     * @group CodeService
      */
     public function it_should_generate_three_codes_with_type_is_2_and_code_code_length_is_15()
     {
