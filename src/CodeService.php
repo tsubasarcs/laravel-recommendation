@@ -22,8 +22,12 @@ class CodeService
      * @param int $times
      * @return array
      */
-    public function generate($times = 0): array
+    public function generate(Int $times = self::DEFAULT_TIMES): array
     {
+        if ($this->times !== self::DEFAULT_TIMES) {
+            return $this->genCodes();
+        }
+
         return $this->times($times)->genCodes();
     }
 
@@ -62,9 +66,9 @@ class CodeService
      * @param int $times
      * @return CodeService
      */
-    public function times($times = 0): CodeService
+    public function times(Int $times = self::DEFAULT_TIMES): CodeService
     {
-        $this->setAttribute($times, 'times');
+        $this->times = $times;
 
         return $this;
     }
@@ -73,9 +77,9 @@ class CodeService
      * @param int $type
      * @return CodeService
      */
-    public function type($type = 0): CodeService
+    public function type(Int $type): CodeService
     {
-        $this->setAttribute($type, 'type');
+        $this->type = $type;
 
         return $this;
     }
@@ -84,19 +88,10 @@ class CodeService
      * @param int $length
      * @return CodeService
      */
-    public function length($length = 0): CodeService
+    public function length(Int $length): CodeService
     {
-        $this->setAttribute($length, 'length');
+        $this->length = $length;
 
         return $this;
-    }
-
-    /**
-     * @param $variable
-     * @param $attribute
-     */
-    protected function setAttribute($variable, $attribute): void
-    {
-        $this->{$attribute} = (!$variable or empty($variable) or gettype($variable) !== 'integer') ? $this->{$attribute} : $variable;
     }
 }
