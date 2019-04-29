@@ -32,7 +32,9 @@ class CodeTest extends TestCase
         $this->assertCount(2, $recommendations);
         foreach ($recommendations as $recommendation) {
             $this->assertArrayHasKey('type', $recommendation);
+            $this->assertEquals(1, $recommendation['type']);
             $this->assertArrayHasKey('code', $recommendation);
+            $this->assertEquals(10, strlen($recommendation['code']));
         }
     }
 
@@ -48,6 +50,7 @@ class CodeTest extends TestCase
         $this->assertArrayHasKey('type', array_first($recommendations));
         $this->assertEquals(2, array_first($recommendations)['type']);
         $this->assertArrayHasKey('code', array_first($recommendations));
+        $this->assertEquals(10, strlen(array_first($recommendations)['code']));
     }
 
     /**
@@ -62,6 +65,7 @@ class CodeTest extends TestCase
         $this->assertArrayHasKey('code', array_first($recommendations));
         $this->assertEquals(15, strlen(array_first($recommendations)['code']));
         $this->assertArrayHasKey('type', array_first($recommendations));
+        $this->assertEquals(1, array_first($recommendations)['type']);
     }
 
     /**
@@ -75,7 +79,9 @@ class CodeTest extends TestCase
         $this->assertCount(3, $recommendations);
         foreach ($recommendations as $recommendation) {
             $this->assertArrayHasKey('type', $recommendation);
+            $this->assertEquals(1, $recommendation['type']);
             $this->assertArrayHasKey('code', $recommendation);
+            $this->assertEquals(10, strlen($recommendation['code']));
         }
     }
 
