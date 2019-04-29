@@ -81,7 +81,8 @@ Code Facade end point is generate(), it always return an array.
 ```php
 <?php
 
-    Code::generate(); // [['type' => 1,'code' => 'X6nbxJ8DHk']];
+    Code::generate(); 
+    // [['type' => 1,'code' => 'X6nbxJ8DHk']];
 
 ```
 
@@ -89,7 +90,8 @@ If you are not use end point, it will return CodeService instance.
 ```php
 <?php
 
-    Code::type(2); // Tsubasarcs\Recommendations\CodeService {#result: [], #times: 1, #type: 2, #length: 10};
+    Code::type(2); 
+    // Tsubasarcs\Recommendations\CodeService {#result: [], #times: 1, #type: 2, #length: 10};
 
 ```
 
@@ -97,6 +99,7 @@ Example
 ```php
 <?php
 
-    Code::type(2)->length(15)->times(2)->generate(); // [["type" => 2, "code" => "tKqk6yo0v3CKiKO"], ["type" => 2, "code" => "meDBcyZSm6bjfRH"]];
+    Code::type(2)->length(15)->times(2)->generate(); 
+    // [["type" => 2, "code" => "tKqk6yo0v3CKiKO"], ["type" => 2, "code" => "meDBcyZSm6bjfRH"]];
 
 ```
