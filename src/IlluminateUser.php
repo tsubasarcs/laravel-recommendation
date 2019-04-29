@@ -1,11 +1,11 @@
 <?php
 
-namespace Tsubasarcs\Recommendations\Tests\Illuminate;
+namespace Tsubasarcs\Recommendations;
 
 use Illuminate\Database\Eloquent\Model;
 use Tsubasarcs\Recommendations\Recommendation;
 
-class User extends Model
+class IlluminateUser extends Model
 {
     protected $table = 'users';
 
