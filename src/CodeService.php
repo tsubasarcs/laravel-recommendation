@@ -52,8 +52,8 @@ class CodeService
     protected function genCode(): string
     {
         $code = str_random($this->length);
-        $model = config('recommendation.prevent_repeat.model');
-        $column = config('recommendation.prevent_repeat.column');
+        $model = config('recommendation.model.name');
+        $column = config('recommendation.model.code_column');
 
         if ($model::where($column, $code)->exists()) {
             return $this->genCode();
