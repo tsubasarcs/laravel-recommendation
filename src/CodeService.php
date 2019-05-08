@@ -7,7 +7,6 @@ use Illuminate\Support\Carbon;
 class CodeService
 {
     const DEFAULT_TIMES = 1;
-    protected $result;
     protected $times;
     protected $type;
     protected $length;
@@ -15,7 +14,6 @@ class CodeService
 
     public function __construct()
     {
-        $this->result = [];
         $this->times = self::DEFAULT_TIMES;
         $this->type = config('recommendation.default.type');
         $this->length = config('recommendation.default.length');
@@ -40,14 +38,16 @@ class CodeService
      */
     protected function genCodes(): array
     {
+        $result = [];
+
         for ($i = self::DEFAULT_TIMES; $i <= $this->times; $i++) {
-            array_push($this->result, [
+            array_push($result, [
                 'type' => $this->type,
                 'code' => $this->genCode(),
             ]);
         }
 
-        return $this->result;
+        return $result;
     }
 
     /**

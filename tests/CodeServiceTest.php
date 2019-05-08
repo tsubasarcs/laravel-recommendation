@@ -128,4 +128,18 @@ class CodeServiceTest extends TestCase
             $this->assertEquals(15, strlen($expected_code));
         }
     }
+
+    /**
+     * @test
+     * @group CodeService
+     */
+    public function it_should_generate_onc_code_once()
+    {
+        $code1 = Code::generate();
+        $code2 = Code::generate();
+
+        $this->assertCount(1, $code1);
+        $this->assertCount(1, $code2);
+        $this->assertNotEquals($code1, $code2);
+    }
 }
