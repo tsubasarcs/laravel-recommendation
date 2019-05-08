@@ -32,7 +32,7 @@ If you want to change some parameters, you can run the following to publish the 
     $ php artisan vendor:publish --provider="Tsubasarcs\Recommendations\RecommendationServiceProvider" --tag="config"
 ```
 
-# Set Config
+# Setting
 If you want to do customize model and column, please check Recommendation Model "code" column to prevent code duplicate.
 ``` php
 // config/recommendation.php
@@ -62,6 +62,20 @@ Generating Code type and length attributes can be customize via setting default 
     ],
 ```
 
+Code structure has three parts, `prefix`, `timestamp` and `code`.<br>
+You can decide to join `prefix` and `timestamp` or not and custom `symbol` between part and part.
+
+``` php
+// config/recommendation.php
+...
+    // Default only code.
+    'code_structure' => [
+        'prefix' => '',
+        'timestamp' => false,
+        'symbol' => '-'
+    ]
+```
+
 # Usage
 ## Generating Code
 Code Facade end point is `generate()`, it will return an array.
@@ -77,8 +91,22 @@ If you are not using endpoint, it will return `CodeService` instance.
     // Tsubasarcs\Recommendations\CodeService {#result: [], #times: 1, #type: 2, #length: 10};
 ```
 
-Example
+#Example
 ```php
     Code::type(2)->length(15)->times(2)->generate(); 
     // [["type" => 2, "code" => "tKqk6yo0v3CKiKO"], ["type" => 2, "code" => "meDBcyZSm6bjfRH"]];
+    
+    'X6nbxJ8DHk'
+    // default
+    
+    'cp-X6nbxJ8DHk'
+    // config('recommendation.code_structure.prefix') == 'cp'
+    
+    '1557287118-Gnr3olcOD6'
+    // config('recommendation.code_structure.timestamp') == true
+    
+    'cp_1557287118_X6nbxJ8DHk'
+    // config('recommendation.code_structure.prefix') == 'cp'
+    // config('recommendation.code_structure.timestamp') == true
+    // config('recommendation.code_structure.symbol') == '_'
 ```

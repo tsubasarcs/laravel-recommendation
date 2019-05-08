@@ -21,6 +21,12 @@ class TestCase extends LaravelTestCase
         ]);
 
         $this->withFactories(__DIR__ . '/factories');
+
+        $this->app['config']->set('recommendation.default.type', 1);
+        $this->app['config']->set('recommendation.default.length', 10);
+        $this->app['config']->set('recommendation.code_structure.prefix', '');
+        $this->app['config']->set('recommendation.code_structure.timestamp', false);
+        $this->app['config']->set('recommendation.code_structure.symbol', '-');
     }
 
     /**

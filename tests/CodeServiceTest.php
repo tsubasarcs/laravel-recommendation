@@ -19,10 +19,11 @@ class CodeServiceTest extends TestCase
         $this->assertCount(1, $recommendations);
 
         $this->assertArrayHasKey('type', $recommendation);
-        $this->assertEquals(1, $recommendation['type']);
+        $this->assertEquals(config('recommendation.default.type'), $recommendation['type']);
 
         $this->assertArrayHasKey('code', $recommendation);
-        $this->assertEquals(10, strlen($recommendation['code']));
+        $expected_code = array_last(explode(config('recommendation.code_structure.symbol'), $recommendation['code']));
+        $this->assertEquals(config('recommendation.default.length'), strlen($expected_code));
     }
 
     /**
@@ -37,10 +38,12 @@ class CodeServiceTest extends TestCase
 
         foreach ($recommendations as $recommendation) {
             $this->assertArrayHasKey('type', $recommendation);
-            $this->assertEquals(1, $recommendation['type']);
+            $this->assertEquals(config('recommendation.default.type'), $recommendation['type']);
 
             $this->assertArrayHasKey('code', $recommendation);
-            $this->assertEquals(10, strlen($recommendation['code']));
+            $expected_code = array_last(explode(config('recommendation.code_structure.symbol'),
+                $recommendation['code']));
+            $this->assertEquals(config('recommendation.default.length'), strlen($expected_code));
         }
     }
 
@@ -60,7 +63,8 @@ class CodeServiceTest extends TestCase
         $this->assertEquals(2, $recommendation['type']);
 
         $this->assertArrayHasKey('code', $recommendation);
-        $this->assertEquals(10, strlen($recommendation['code']));
+        $expected_code = array_last(explode(config('recommendation.code_structure.symbol'), $recommendation['code']));
+        $this->assertEquals(config('recommendation.default.length'), strlen($expected_code));
     }
 
     /**
@@ -76,10 +80,11 @@ class CodeServiceTest extends TestCase
         $this->assertCount(1, $recommendations);
 
         $this->assertArrayHasKey('type', $recommendation);
-        $this->assertEquals(1, $recommendation['type']);
+        $this->assertEquals(config('recommendation.default.type'), $recommendation['type']);
 
         $this->assertArrayHasKey('code', $recommendation);
-        $this->assertEquals(15, strlen($recommendation['code']));
+        $expected_code = array_last(explode(config('recommendation.code_structure.symbol'), $recommendation['code']));
+        $this->assertEquals(15, strlen($expected_code));
     }
 
     /**
@@ -94,10 +99,12 @@ class CodeServiceTest extends TestCase
 
         foreach ($recommendations as $recommendation) {
             $this->assertArrayHasKey('type', $recommendation);
-            $this->assertEquals(1, $recommendation['type']);
+            $this->assertEquals(config('recommendation.default.type'), $recommendation['type']);
 
             $this->assertArrayHasKey('code', $recommendation);
-            $this->assertEquals(10, strlen($recommendation['code']));
+            $expected_code = array_last(explode(config('recommendation.code_structure.symbol'),
+                $recommendation['code']));
+            $this->assertEquals(config('recommendation.default.length'), strlen($expected_code));
         }
     }
 
@@ -116,7 +123,9 @@ class CodeServiceTest extends TestCase
             $this->assertEquals(2, array_first($recommendations)['type']);
 
             $this->assertArrayHasKey('code', $recommendation);
-            $this->assertEquals(15, strlen(array_first($recommendations)['code']));
+            $expected_code = array_last(explode(config('recommendation.code_structure.symbol'),
+                $recommendation['code']));
+            $this->assertEquals(15, strlen($expected_code));
         }
     }
 }

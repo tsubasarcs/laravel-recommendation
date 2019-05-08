@@ -2,6 +2,8 @@
 
 namespace Tsubasarcs\Recommendations;
 
+use Illuminate\Support\Carbon;
+
 class CodeService
 {
     const DEFAULT_TIMES = 1;
@@ -9,6 +11,7 @@ class CodeService
     protected $times;
     protected $type;
     protected $length;
+    protected $symbol;
 
     public function __construct()
     {
@@ -16,6 +19,7 @@ class CodeService
         $this->times = self::DEFAULT_TIMES;
         $this->type = config('recommendation.default.type');
         $this->length = config('recommendation.default.length');
+        $this->symbol = empty(config('recommendation.code_structure.symbol')) ? '-' : config('recommendation.code_structure.symbol');
     }
 
     /**
@@ -51,12 +55,34 @@ class CodeService
      */
     protected function genCode(): string
     {
-        $code = str_random($this->length);
+        $structure = [
+            'prefix' => config('recommendation.code_structure.prefix'),
+            'timestamp' => Carbon::now()->timestamp,
+            'code' => str_random($this->length)
+        ];
+        $code = collect($this->formatCodeStructure($structure))->implode($this->symbol);
         $model = config('recommendation.model.name');
         $column = config('recommendation.model.code_column');
 
         if ($model::where($column, $code)->exists()) {
             return $this->genCode();
+        }
+
+        return $code;
+    }
+
+    /**
+     * @param array $code
+     * @return array
+     */
+    protected function formatCodeStructure(Array $code): array
+    {
+        if (empty(config('recommendation.code_structure.prefix'))) {
+            array_pull($code, 'prefix');
+        }
+
+        if (!config('recommendation.code_structure.timestamp')) {
+            array_pull($code, 'timestamp');
         }
 
         return $code;

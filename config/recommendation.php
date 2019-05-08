@@ -9,4 +9,9 @@ return [
         'type' => 1,
         'length' => 10,
     ],
+    'code_structure' => [
+        'prefix' => '',
+        'timestamp' => false,
+        'symbol' => '-'
+    ]
 ];
