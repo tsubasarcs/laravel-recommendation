@@ -17,7 +17,7 @@ class CreateRecommendationsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id')->index()->comment('Users id');
             $table->smallInteger('type')->comment('Code type');
-            $table->string('code')->comment('Unique code');
+            $table->unique('code')->comment('Unique code');
             $table->tinyInteger('status')->default(1)->comment('Is effective');
             $table->softDeletes();
             $table->timestamps();
