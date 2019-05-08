@@ -37,7 +37,7 @@
         "Tsubasarcs\\Recommendations\\RecommendationServiceProvider"
       ],
       "aliases": {
-        "Privacier": "Tsubasarcs\\Recommendations\\Facades\\Code"
+        "Code": "Tsubasarcs\\Recommendations\\Facades\\Code"
       }
     }
   },
