@@ -14,10 +14,6 @@ class RecommendationServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/recommendation.php', 'recommendation');
-
-        $this->app->bind(CodeService::class, function () {
-            return new CodeService;
-        });
     }
 
     /**
