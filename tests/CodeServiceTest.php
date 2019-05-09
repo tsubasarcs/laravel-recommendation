@@ -110,6 +110,61 @@ class CodeServiceTest extends TestCase
 
     /**
      * @test
+     * @group Code
+     */
+    public function it_should_generate_code_with_specified_prefix()
+    {
+        $recommendations = Code::prefix('sean')->generate();
+        $recommendation = array_first($recommendations);
+
+        $this->assertCount(1, $recommendations);
+        $this->assertArrayHasKey('type', $recommendation);
+        $this->assertEquals(config('recommendation.default.type'), $recommendation['type']);
+
+        $this->assertArrayHasKey('code', $recommendation);
+        $expected_code = array_last(explode('sean-', $recommendation['code']));
+        $this->assertEquals(config('recommendation.default.length'), strlen($expected_code));
+    }
+
+    /**
+     * @test
+     * @group Code
+     */
+    public function it_should_generate_code_with_timestamp()
+    {
+        $recommendations = Code::timestamp(true)->generate();
+        $recommendation = array_first($recommendations);
+
+        $this->assertCount(1, $recommendations);
+        $this->assertArrayHasKey('type', $recommendation);
+        $this->assertEquals(config('recommendation.default.type'), $recommendation['type']);
+
+        $this->assertArrayHasKey('code', $recommendation);
+        $dismantled = explode(config('recommendation.code_structure.symbol'), $recommendation['code']);
+        $this->assertNotEmpty(array_first($dismantled));
+        $this->assertEquals(config('recommendation.default.length'), strlen(array_last($dismantled)));
+    }
+
+    /**
+     * @test
+     * @group Code
+     */
+    public function it_should_generate_code_with_specified_symbol()
+    {
+        $recommendations = Code::prefix('sean')->symbol('@')->generate();
+        $recommendation = array_first($recommendations);
+
+        $this->assertCount(1, $recommendations);
+        $this->assertArrayHasKey('type', $recommendation);
+        $this->assertEquals(config('recommendation.default.type'), $recommendation['type']);
+
+        $this->assertArrayHasKey('code', $recommendation);
+        $expected_code = array_last(explode('@', $recommendation['code']));
+        $this->assertEquals(config('recommendation.default.length'), strlen($expected_code));
+    }
+
+    /**
+     * @test
      * @group CodeService
      */
     public function it_should_generate_three_codes_with_type_is_2_and_code_length_is_15()

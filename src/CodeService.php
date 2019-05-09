@@ -10,6 +10,8 @@ class CodeService
     protected $times;
     protected $type;
     protected $length;
+    protected $prefix;
+    protected $timestamp;
     protected $symbol;
 
     public function __construct()
@@ -17,14 +19,16 @@ class CodeService
         $this->times = self::DEFAULT_TIMES;
         $this->type = config('recommendation.default.type');
         $this->length = config('recommendation.default.length');
-        $this->symbol = empty(config('recommendation.code_structure.symbol')) ? '-' : config('recommendation.code_structure.symbol');
+        $this->prefix = config('recommendation.code_structure.prefix');
+        $this->timestamp = config('recommendation.code_structure.timestamp');
+        $this->symbol = config('recommendation.code_structure.symbol');
     }
 
     /**
      * @param int $times
      * @return array
      */
-    public function generate(Int $times = self::DEFAULT_TIMES): array
+    public function generate(int $times = self::DEFAULT_TIMES): array
     {
         if ($this->times !== self::DEFAULT_TIMES) {
             return $this->genCodes();
@@ -56,8 +60,8 @@ class CodeService
     protected function genCode(): string
     {
         $structure = [
-            'prefix' => config('recommendation.code_structure.prefix'),
-            'timestamp' => Carbon::now()->timestamp,
+            'prefix' => $this->prefix,
+            'timestamp' => $this->timestamp ? Carbon::now()->timestamp : '',
             'code' => str_random($this->length)
         ];
         $code = collect($this->formatCodeStructure($structure))->implode($this->symbol);
@@ -75,13 +79,13 @@ class CodeService
      * @param array $code
      * @return array
      */
-    protected function formatCodeStructure(Array $code): array
+    protected function formatCodeStructure(array $code): array
     {
-        if (empty(config('recommendation.code_structure.prefix'))) {
+        if (empty($code['prefix'])) {
             array_pull($code, 'prefix');
         }
 
-        if (!config('recommendation.code_structure.timestamp')) {
+        if (empty($code['timestamp'])) {
             array_pull($code, 'timestamp');
         }
 
@@ -92,7 +96,7 @@ class CodeService
      * @param int $times
      * @return CodeService
      */
-    public function times(Int $times = self::DEFAULT_TIMES): CodeService
+    public function times(int $times = self::DEFAULT_TIMES): CodeService
     {
         $this->times = $times;
 
@@ -103,7 +107,7 @@ class CodeService
      * @param int $type
      * @return CodeService
      */
-    public function type(Int $type): CodeService
+    public function type(int $type): CodeService
     {
         $this->type = $type;
 
@@ -114,9 +118,42 @@ class CodeService
      * @param int $length
      * @return CodeService
      */
-    public function length(Int $length): CodeService
+    public function length(int $length): CodeService
     {
         $this->length = $length;
+
+        return $this;
+    }
+
+    /**
+     * @param string $prefix
+     * @return CodeService
+     */
+    public function prefix(string $prefix): CodeService
+    {
+        $this->prefix = $prefix;
+
+        return $this;
+    }
+
+    /**
+     * @param bool $bool
+     * @return CodeService
+     */
+    public function timestamp(bool $bool): CodeService
+    {
+        $this->timestamp = $bool;
+
+        return $this;
+    }
+
+    /**
+     * @param string $symbol
+     * @return CodeService
+     */
+    public function symbol(string $symbol): CodeService
+    {
+        $this->symbol = $symbol;
 
         return $this;
     }
