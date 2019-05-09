@@ -35,10 +35,7 @@
       "component": "package",
       "providers": [
         "Tsubasarcs\\Recommendations\\RecommendationServiceProvider"
-      ],
-      "aliases": {
-        "Code": "Tsubasarcs\\Recommendations\\Facades\\Code"
-      }
+      ]
     }
   },
   "minimum-stability": "stable",

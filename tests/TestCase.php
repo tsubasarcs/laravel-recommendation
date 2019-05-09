@@ -17,7 +17,7 @@ class TestCase extends LaravelTestCase
 
         $this->loadMigrationsFrom([
             '--database' => 'testing',
-            '--realpath' => realpath(__DIR__ . '/../database/migrations'),
+            '--realpath' => realpath(__DIR__ . '/../migrations'),
         ]);
 
         $this->withFactories(__DIR__ . '/factories');

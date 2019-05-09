@@ -15,7 +15,7 @@ class RecommendationServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/recommendation.php', 'recommendation');
 
-        $this->app->bind('code', function () {
+        $this->app->bind(CodeService::class, function () {
             return new CodeService;
         });
     }
@@ -29,7 +29,7 @@ class RecommendationServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../database/migrations/2019_04_23_074703_create_recommendations_table.php' => database_path('migrations/2019_04_23_074703_create_recommendations_table.php'),
+                __DIR__ . '/../migrations/2019_04_23_074703_create_recommendations_table.php' => database_path('migrations/2019_04_23_074703_create_recommendations_table.php'),
             ], 'migrations');
 
             $this->publishes([
