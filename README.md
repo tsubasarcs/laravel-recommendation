@@ -11,16 +11,7 @@ Currently this package only for laravel 5.5.
     $ composer require tsubasarcs/laravel-recommendation
 ```
 
-### Register Alias
-
-You need to alias `Code` in `app.php`.
-
-``` php
-//app.php
-    'aliases' => [
-        'Code' => \Tsubasarcs\Recommendations\Facades\Code::class,
-    ],
-```
+### Publish Migration and Config
 
 Run the following to publish the migrations on your terminal:
 ``` bash
@@ -33,6 +24,8 @@ If you want to change some parameters, you can run the following to publish the 
 ```
 
 # Setting
+
+### Model Recommendation
 If you want to do customize model and column, please check Recommendation Model "code" column to prevent code duplicate.
 ``` php
 // config/recommendation.php
@@ -51,6 +44,7 @@ You need to change it to your application model.
     'relation_model' => \Tsubasarcs\Recommendations\IlluminateUser::class,
 ```
 
+### Default attributes
 Generating Code type and length attributes can be customize via setting default key value.
 
 ``` php
@@ -77,7 +71,7 @@ You can decide to join `prefix` and `timestamp` or not and custom `symbol` betwe
 ```
 
 # Usage
-## Generating Code
+### Generating Code
 Code Facade end point is `generate()`, it will return an array.
 
 ```php
@@ -93,8 +87,17 @@ If you are not using endpoint, it will return `CodeService` instance.
 
 #Example
 ```php
-    Code::type(2)->length(15)->times(2)->generate(); 
-    // [["type" => 2, "code" => "tKqk6yo0v3CKiKO"], ["type" => 2, "code" => "meDBcyZSm6bjfRH"]];
+    Code::prefix('cp')
+        ->timestamp(true)
+        ->symbol('@')
+        ->type(2)
+        ->length(15)
+        ->times(2)
+        ->generate(); 
+    // [
+    //      ["type" => 2, "code" => "cp@1557454693@4PZHxJXdM7K8OBo"],
+    //      ["type" => 2, "code" => "cp@1557454693@rnExFAeD18GDMhs"]
+    // ];
     
     'X6nbxJ8DHk'
     // default
